@@ -49,6 +49,7 @@
         '@': path.resolve(__dirname, './src'),
       },
     },
+    base: '/cswiki',
     build: {
       target: 'esnext',
       outDir: 'build',
