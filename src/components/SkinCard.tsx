@@ -29,9 +29,9 @@ export function SkinCard({ skin }: SkinCardProps) {
     <div className="bg-zinc-900 rounded-lg overflow-hidden border border-zinc-800 hover:border-orange-600/50 transition-all hover:shadow-lg hover:shadow-orange-600/10 group">
       <div className="aspect-video bg-zinc-800 overflow-hidden relative">
         <ImageWithFallback
-          src={`https://source.unsplash.com/400x300/?${encodeURIComponent(skin.image)}`}
+          src={skin.image}
           alt={skin.name}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+          className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
         />
         <div className="absolute top-2 right-2">
           <Badge className={rarityColors[skin.rarity] || 'bg-zinc-700'}>

@@ -1,150 +1,70 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { SkinCard } from './SkinCard';
 import { Search, Filter } from 'lucide-react';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 
-const skins = [
-  {
-    id: 1,
-    name: 'AK-47 | Redline',
-    weapon: 'AK-47',
-    collection: 'Phoenix',
-    rarity: 'Тайное',
-    price: '$28.50',
-    image: 'csgo weapon',
-  },
-  {
-    id: 2,
-    name: 'AWP | Dragon Lore',
-    weapon: 'AWP',
-    collection: 'Cobblestone',
-    rarity: 'Тайное',
-    price: '$8,450.00',
-    image: 'gaming weapon sniper',
-  },
-  {
-    id: 3,
-    name: 'M4A4 | Howl',
-    weapon: 'M4A4',
-    collection: 'Huntsman',
-    rarity: 'Контрабанда',
-    price: '$6,200.00',
-    image: 'gaming rifle',
-  },
-  {
-    id: 4,
-    name: 'Karambit | Fade',
-    weapon: 'Нож',
-    collection: 'Ножи',
-    rarity: 'Тайное',
-    price: '$1,850.00',
-    image: 'blade knife',
-  },
-  {
-    id: 5,
-    name: 'Desert Eagle | Blaze',
-    weapon: 'Desert Eagle',
-    collection: 'Assault',
-    rarity: 'Запрещённое',
-    price: '$425.00',
-    image: 'gaming pistol',
-  },
-  {
-    id: 6,
-    name: 'Glock-18 | Fade',
-    weapon: 'Glock-18',
-    collection: 'Cache',
-    rarity: 'Запрещённое',
-    price: '$385.00',
-    image: 'gaming handgun',
-  },
-  {
-    id: 7,
-    name: 'AK-47 | Fire Serpent',
-    weapon: 'AK-47',
-    collection: 'Bravo',
-    rarity: 'Тайное',
-    price: '$2,100.00',
-    image: 'gaming assault rifle',
-  },
-  {
-    id: 8,
-    name: 'M4A1-S | Hyper Beast',
-    weapon: 'M4A1-S',
-    collection: 'Falchion',
-    rarity: 'Тайное',
-    price: '$115.00',
-    image: 'tactical weapon',
-  },
-  {
-    id: 9,
-    name: 'USP-S | Kill Confirmed',
-    weapon: 'USP-S',
-    collection: 'Shadow',
-    rarity: 'Засекреченное',
-    price: '$78.50',
-    image: 'silenced pistol',
-  },
-  {
-    id: 10,
-    name: 'Butterfly Knife | Doppler',
-    weapon: 'Нож',
-    collection: 'Ножи',
-    rarity: 'Тайное',
-    price: '$2,450.00',
-    image: 'butterfly knife',
-  },
-  {
-    id: 11,
-    name: 'AWP | Asiimov',
-    weapon: 'AWP',
-    collection: 'Phoenix',
-    rarity: 'Тайное',
-    price: '$125.00',
-    image: 'futuristic sniper',
-  },
-  {
-    id: 12,
-    name: 'P250 | Nuclear Threat',
-    weapon: 'P250',
-    collection: 'Nuke',
-    rarity: 'Промышленное',
-    price: '$1,850.00',
-    image: 'compact pistol',
-  },
-];
-
 const categories = ['Все', 'Винтовки', 'Снайперские', 'Пистолеты', 'Ножи', 'ПП'];
 const rarities = ['Все', 'Тайное', 'Засекреченное', 'Запрещённое', 'Контрабанда', 'Промышленное'];
 
 export function Skins() {
+  const [skins, setSkins] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('Все');
   const [selectedRarity, setSelectedRarity] = useState('Все');
 
+  useEffect(() => {
+    const fetchSkins = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch('https://raw.githubusercontent.com/ByMykel/CSGO-API/main/public/api/en/skins.json');
+        if (!response.ok) throw new Error('Ошибка при загрузке данных');
+        const data = await response.json();
+        setSkins(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSkins();
+  }, []);
+
+  if (loading) return <p className="text-white text-center py-12">Загрузка скинов...</p>;
+  if (error) return <p className="text-red-500 text-center py-12">Ошибка: {error}</p>;
+
   const filteredSkins = skins.filter(skin => {
-    const matchesSearch = skin.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         skin.weapon.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = selectedCategory === 'Все' || 
-                           (selectedCategory === 'Винтовки' && (skin.weapon.includes('AK-47') || skin.weapon.includes('M4'))) ||
-                           (selectedCategory === 'Снайперские' && skin.weapon === 'AWP') ||
-                           (selectedCategory === 'Пистолеты' && (skin.weapon.includes('Desert Eagle') || skin.weapon.includes('Glock') || skin.weapon.includes('USP') || skin.weapon.includes('P250'))) ||
-                           (selectedCategory === 'Ножи' && skin.weapon === 'Нож');
-    const matchesRarity = selectedRarity === 'Все' || skin.rarity === selectedRarity;
-    
+    const skinName = skin.name || '';
+    const weaponName = skin.weapon?.name || '';
+    const skinCategory = skin.category?.name || '';
+    const skinRarity = skin.rarity?.name || '';
+
+    const matchesSearch =
+      skinName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      weaponName.toLowerCase().includes(searchQuery.toLowerCase());
+
+    const matchesCategory =
+      selectedCategory === 'Все' ||
+      (selectedCategory === 'Винтовки' && /AK-47|M4/i.test(weaponName)) ||
+      (selectedCategory === 'Снайперские' && /AWP/i.test(weaponName)) ||
+      (selectedCategory === 'Пистолеты' && /Desert Eagle|Glock|USP|P250/i.test(weaponName)) ||
+      (selectedCategory === 'Ножи' && /Knife|Нож/i.test(weaponName));
+
+    const matchesRarity =
+      selectedRarity === 'Все' || skinRarity === selectedRarity;
+
     return matchesSearch && matchesCategory && matchesRarity;
   });
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="mb-8">
-        <h1 className="text-white mb-2">
-          База скинов CS:GO
-        </h1>
-        <p className="text-zinc-400">
-          Просматривайте и находите все доступные скины оружия CS:GO
-        </p>
+        <h1 className="text-white mb-2">База скинов CS:GO</h1>
+        <p className="text-zinc-400">Просматривайте и находите все доступные скины оружия CS:GO</p>
       </div>
 
       {/* Search and Filters */}
@@ -161,6 +81,7 @@ export function Skins() {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4">
+          {/* Category Filter */}
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-2">
               <Filter className="h-4 w-4 text-zinc-400" />
@@ -181,6 +102,7 @@ export function Skins() {
             </div>
           </div>
 
+          {/* Rarity Filter */}
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-2">
               <Filter className="h-4 w-4 text-zinc-400" />
@@ -211,13 +133,21 @@ export function Skins() {
       </div>
 
       {/* Skins Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {filteredSkins.map(skin => (
-          <SkinCard key={skin.id} skin={skin} />
-        ))}
-      </div>
-
-      {filteredSkins.length === 0 && (
+      {filteredSkins.length > 0 ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {filteredSkins.map(skin => (
+            <SkinCard key={skin.id} skin={{
+              id: skin.id,
+              name: skin.name,
+              weapon: skin.weapon?.name,
+              rarity: skin.rarity?.name,
+              collection: skin.collections?.[0]?.name || '',
+              price: '', // если есть цена в данных API, можно сюда добавить
+              image: skin.image
+            }} />
+          ))}
+        </div>
+      ) : (
         <div className="text-center py-12">
           <p className="text-zinc-500">Скины не найдены по вашим критериям</p>
         </div>
