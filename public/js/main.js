@@ -2,18 +2,18 @@
 document.addEventListener('DOMContentLoaded', () => {
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
-    
+
     if (mobileMenuBtn && mobileMenu) {
         mobileMenuBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
     }
-    
+
     // Initialize skins page if on skins.html
     if (window.location.pathname.includes('skins.html')) {
         initSkinsPage();
     }
-    
+
     // Initialize guides page if on guides/index.html
     if (window.location.pathname.includes('guides/index.html')) {
         initGuidesPage();
@@ -22,25 +22,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ==================== SKINS PAGE ====================
 let allSkins = [];
+let filteredSkins = [];
 let selectedCategory = 'all';
 let selectedRarity = 'all';
 let searchQuery = '';
+
+// Pagination
+const ITEMS_PER_PAGE = 100;
+let currentPage = 1;
+let totalPages = 1;
 
 async function initSkinsPage() {
     const loadingEl = document.getElementById('loading');
     const errorEl = document.getElementById('error');
     const skinsGrid = document.getElementById('skins-grid');
     const noResults = document.getElementById('no-results');
-    
+
     // Search input
     const searchInput = document.getElementById('search-input');
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
             searchQuery = e.target.value.toLowerCase();
+            currentPage = 1;
             filterAndRenderSkins();
         });
     }
-    
+
     // Category buttons
     document.querySelectorAll('.category-btn').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -51,10 +58,11 @@ async function initSkinsPage() {
             btn.classList.remove('bg-zinc-900', 'border', 'border-zinc-800', 'text-zinc-300');
             btn.classList.add('active', 'bg-orange-600', 'text-white');
             selectedCategory = btn.dataset.category;
+            currentPage = 1;
             filterAndRenderSkins();
         });
     });
-    
+
     // Rarity buttons
     document.querySelectorAll('.rarity-btn').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -65,16 +73,43 @@ async function initSkinsPage() {
             btn.classList.remove('bg-zinc-900', 'border', 'border-zinc-800', 'text-zinc-300');
             btn.classList.add('active', 'bg-orange-600', 'text-white');
             selectedRarity = btn.dataset.rarity;
+            currentPage = 1;
             filterAndRenderSkins();
         });
     });
-    
+
+    // Pagination buttons
+    const prevBtn = document.getElementById('prev-page');
+    const nextBtn = document.getElementById('next-page');
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                renderSkinsPage();
+                updatePagination();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderSkinsPage();
+                updatePagination();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+    }
+
     // Fetch skins
     try {
         const response = await fetch('https://raw.githubusercontent.com/ByMykel/CSGO-API/main/public/api/en/skins.json');
         if (!response.ok) throw new Error('Ошибка при загрузке данных');
         allSkins = await response.json();
-        
+
         loadingEl.style.display = 'none';
         skinsGrid.classList.remove('hidden');
         filterAndRenderSkins();
@@ -86,52 +121,78 @@ async function initSkinsPage() {
 }
 
 function filterAndRenderSkins() {
-    const skinsGrid = document.getElementById('skins-grid');
-    const noResults = document.getElementById('no-results');
-    const resultsCount = document.getElementById('results-count');
-    const resultsLabel = document.getElementById('results-label');
-    
-    const filteredSkins = allSkins.filter(skin => {
+    filteredSkins = allSkins.filter(skin => {
         const skinName = skin.name || '';
         const weaponName = skin.weapon?.name || '';
         const skinCategory = skin.category?.name || '';
         const skinRarity = skin.rarity?.name || '';
-        
+
         const matchesSearch = skinName.toLowerCase().includes(searchQuery) ||
                              weaponName.toLowerCase().includes(searchQuery);
-        
+
         let matchesCategory = selectedCategory === 'all';
         if (selectedCategory === 'rifle') matchesCategory = /AK-47|M4/i.test(weaponName);
         else if (selectedCategory === 'sniper') matchesCategory = /AWP/i.test(weaponName);
         else if (selectedCategory === 'pistol') matchesCategory = /Desert Eagle|Glock|USP|P250/i.test(weaponName);
         else if (selectedCategory === 'knife') matchesCategory = /Knife|Нож/i.test(weaponName);
         else if (selectedCategory === 'smg') matchesCategory = /MP7|MP9|MAC-10|UMP-45/i.test(weaponName);
-        
+
         const matchesRarity = selectedRarity === 'all' || skinRarity === selectedRarity;
-        
+
         return matchesSearch && matchesCategory && matchesRarity;
     });
-    
+
+    // Update total pages
+    totalPages = Math.ceil(filteredSkins.length / ITEMS_PER_PAGE);
+    if (currentPage > totalPages) currentPage = 1;
+
     // Update results count
-    resultsCount.textContent = filteredSkins.length;
-    resultsLabel.textContent = getRussianCount(filteredSkins.length, 'скин', 'скина', 'скинов');
-    
+    const resultsCount = document.getElementById('results-count');
+    const resultsLabel = document.getElementById('results-label');
+    if (resultsCount && resultsLabel) {
+        resultsCount.textContent = filteredSkins.length;
+        resultsLabel.textContent = getRussianCount(filteredSkins.length, 'скин', 'скина', 'скинов');
+    }
+
+    renderSkinsPage();
+    updatePagination();
+}
+
+function renderSkinsPage() {
+    const skinsGrid = document.getElementById('skins-grid');
+    const noResults = document.getElementById('no-results');
+    const pagination = document.getElementById('pagination');
+    const paginationInfo = document.getElementById('pagination-info');
+
     if (filteredSkins.length === 0) {
         skinsGrid.classList.add('hidden');
         noResults.classList.remove('hidden');
+        pagination.classList.add('hidden');
+        if (paginationInfo) paginationInfo.textContent = '';
         return;
     }
-    
+
     skinsGrid.classList.remove('hidden');
     noResults.classList.add('hidden');
-    
-    skinsGrid.innerHTML = filteredSkins.slice(0, 100).map(skin => {
+    pagination.classList.remove('hidden');
+
+    // Calculate start and end indices
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = Math.min(startIndex + ITEMS_PER_PAGE, filteredSkins.length);
+    const pageSkins = filteredSkins.slice(startIndex, endIndex);
+
+    // Update pagination info
+    if (paginationInfo) {
+        paginationInfo.textContent = `Показано ${startIndex + 1}–${endIndex} из ${filteredSkins.length} скинов`;
+    }
+
+    skinsGrid.innerHTML = pageSkins.map(skin => {
         const rarityClass = getRarityClass(skin.rarity?.name);
         return `
             <article class="bg-zinc-900 rounded-lg overflow-hidden border border-zinc-800 card-hover transition-all group">
                 <div class="aspect-video bg-zinc-800 overflow-hidden relative">
-                    <img src="${skin.image || 'https://via.placeholder.com/400x300?text=No+Image'}" 
-                         alt="${skin.name}" 
+                    <img src="${skin.image || 'https://via.placeholder.com/400x300?text=No+Image'}"
+                         alt="${skin.name}"
                          class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
                          loading="lazy">
                     <div class="absolute top-2 right-2">
@@ -160,6 +221,69 @@ function filterAndRenderSkins() {
             </article>
         `;
     }).join('');
+}
+
+function updatePagination() {
+    const pagination = document.getElementById('pagination');
+    const pageNumbers = document.getElementById('page-numbers');
+    const prevBtn = document.getElementById('prev-page');
+    const nextBtn = document.getElementById('next-page');
+
+    if (!pagination || !pageNumbers || !prevBtn || !nextBtn) return;
+
+    if (filteredSkins.length === 0) {
+        pagination.classList.add('hidden');
+        return;
+    }
+
+    pagination.classList.remove('hidden');
+
+    // Update prev/next buttons
+    prevBtn.disabled = currentPage === 1;
+    nextBtn.disabled = currentPage === totalPages;
+
+    // Generate page numbers
+    let pages = [];
+    const maxVisible = 5;
+
+    if (totalPages <= maxVisible) {
+        pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+    } else {
+        if (currentPage <= 3) {
+            pages = [1, 2, 3, 4, '...', totalPages];
+        } else if (currentPage >= totalPages - 2) {
+            pages = [1, '...', totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
+        } else {
+            pages = [1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages];
+        }
+    }
+
+    pageNumbers.innerHTML = pages.map(page => {
+        if (page === '...') {
+            return '<span class="px-3 py-2 text-zinc-500">...</span>';
+        }
+        const isActive = page === currentPage;
+        return `
+            <button data-page="${page}"
+                class="px-4 py-2 rounded-lg transition-colors ${
+                    isActive
+                        ? 'bg-orange-600 text-white'
+                        : 'bg-zinc-900 border border-zinc-800 text-zinc-300 hover:bg-zinc-800'
+                }">
+                ${page}
+            </button>
+        `;
+    }).join('');
+
+    // Add click handlers to page buttons
+    pageNumbers.querySelectorAll('button[data-page]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            currentPage = parseInt(btn.dataset.page);
+            renderSkinsPage();
+            updatePagination();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    });
 }
 
 function getRarityClass(rarity) {
@@ -280,7 +404,7 @@ const guidesData = [
         category: 'Tutorials',
         map: 'All Maps',
         difficulty: 'Beginner',
-        description: 'Улучшите свой аим изучив правильное позиционирование прицела и пре-аим техники.',
+        description: 'Улучшите с��ой аим изучив правильное позиционирование прицела и пре-аим техники.',
         image: 'crosshair target',
         views: '25.6k',
         file: 'crosshair-placement.html'
@@ -321,7 +445,7 @@ function initGuidesPage() {
             filterAndRenderGuides();
         });
     }
-    
+
     // Category buttons
     document.querySelectorAll('.category-btn').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -335,7 +459,7 @@ function initGuidesPage() {
             filterAndRenderGuides();
         });
     });
-    
+
     // Difficulty buttons
     document.querySelectorAll('.difficulty-btn').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -349,7 +473,7 @@ function initGuidesPage() {
             filterAndRenderGuides();
         });
     });
-    
+
     filterAndRenderGuides();
 }
 
@@ -358,33 +482,33 @@ function filterAndRenderGuides() {
     const noResults = document.getElementById('no-guides-results');
     const resultsCount = document.getElementById('guides-results-count');
     const resultsLabel = document.getElementById('guides-results-label');
-    
+
     const filteredGuides = guidesData.filter(guide => {
         const matchesSearch = guide.title.toLowerCase().includes(guidesSearchQuery) ||
                              guide.map.toLowerCase().includes(guidesSearchQuery) ||
                              guide.description.toLowerCase().includes(guidesSearchQuery);
-        
-        const matchesCategory = guidesSelectedCategory === 'all' || 
+
+        const matchesCategory = guidesSelectedCategory === 'all' ||
                                guide.category.toLowerCase() === guidesSelectedCategory.toLowerCase();
-        
-        const matchesDifficulty = guidesSelectedDifficulty === 'all' || 
+
+        const matchesDifficulty = guidesSelectedDifficulty === 'all' ||
                                  guide.difficulty.toLowerCase() === guidesSelectedDifficulty.toLowerCase();
-        
+
         return matchesSearch && matchesCategory && matchesDifficulty;
     });
-    
+
     resultsCount.textContent = filteredGuides.length;
     resultsLabel.textContent = getRussianCount(filteredGuides.length, 'гайд', 'гайда', 'гайдов');
-    
+
     if (filteredGuides.length === 0) {
         guidesGrid.classList.add('hidden');
         noResults.classList.remove('hidden');
         return;
     }
-    
+
     guidesGrid.classList.remove('hidden');
     noResults.classList.add('hidden');
-    
+
     const categoryColors = {
         'Smokes': 'bg-gray-600/20 text-gray-400',
         'Flashbangs': 'bg-yellow-600/20 text-yellow-400',
@@ -392,19 +516,19 @@ function filterAndRenderGuides() {
         'Tutorials': 'bg-blue-600/20 text-blue-400',
         'Strategies': 'bg-purple-600/20 text-purple-400'
     };
-    
+
     const difficultyColors = {
         'Beginner': 'bg-green-600/20 text-green-400',
         'Easy': 'bg-blue-600/20 text-blue-400',
         'Medium': 'bg-yellow-600/20 text-yellow-400',
         'Hard': 'bg-red-600/20 text-red-400'
     };
-    
+
     guidesGrid.innerHTML = filteredGuides.map(guide => `
         <article class="bg-zinc-900 rounded-lg overflow-hidden border border-zinc-800 card-hover transition-all group">
             <div class="aspect-video bg-zinc-800 overflow-hidden relative">
-                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&h=300&fit=crop" 
-                     alt="${guide.title}" 
+                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&h=300&fit=crop"
+                     alt="${guide.title}"
                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                      loading="lazy">
                 <div class="absolute top-2 left-2">
@@ -469,18 +593,18 @@ function getDifficultyName(difficulty) {
 function getRussianCount(count, one, few, many) {
     const lastDigit = count % 10;
     const lastTwoDigits = count % 100;
-    
+
     if (lastTwoDigits >= 11 && lastTwoDigits <= 19) {
         return many;
     }
-    
+
     if (lastDigit === 1) {
         return one;
     }
-    
+
     if (lastDigit >= 2 && lastDigit <= 4) {
         return few;
     }
-    
+
     return many;
 }

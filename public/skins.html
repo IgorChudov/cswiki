@@ -226,6 +226,18 @@
             </svg>
             <p class="text-zinc-500 mt-4">Скины не найдены по вашим критериям</p>
         </div>
+
+        <!-- Pagination -->
+        <div id="pagination" class="hidden mt-8 flex items-center justify-center gap-2">
+            <button id="prev-page" class="px-4 py-2 bg-zinc-900 border border-zinc-800 text-zinc-300 rounded-lg hover:bg-zinc-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+                ← Назад
+            </button>
+            <div id="page-numbers" class="flex gap-2"></div>
+            <button id="next-page" class="px-4 py-2 bg-zinc-900 border border-zinc-800 text-zinc-300 rounded-lg hover:bg-zinc-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+                Вперёд →
+            </button>
+        </div>
+        <div id="pagination-info" class="text-center text-zinc-400 mt-4 text-sm"></div>
     </main>
 
     <!-- Footer -->
