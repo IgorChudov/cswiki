@@ -1,0 +1,13 @@
+{
+      "name": "CS:GO Wiki",
+      "version": "0.2.0",
+      "private": true,
+      "homepage": "https://IgorChudov.github.io/cswiki",
+      "description": "Статический сайт CS:GO Wiki с базой скинов, гайдами и партнёрскими платформами",
+      "devDependencies": {
+            "gh-pages": "6.3.0"
+      },
+      "scripts": {
+            "deploy": "gh-pages -d public"
+      }
+}

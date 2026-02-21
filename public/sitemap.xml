@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    
+    <!-- Главная страница -->
+    <url>
+        <loc>https://igorchudov.github.io/cswiki/</loc>
+        <lastmod>2024-11-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <!-- Страница скинов -->
+    <url>
+        <loc>https://igorchudov.github.io/cswiki/skins.html</loc>
+        <lastmod>2024-11-15</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- Страница партнёров -->
+    <url>
+        <loc>https://igorchudov.github.io/cswiki/partners.html</loc>
+        <lastmod>2024-11-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Страница гайдов -->
+    <url>
+        <loc>https://igorchudov.github.io/cswiki/guides/</loc>
+        <lastmod>2024-11-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- Гайды (12 страниц) -->
+    <url>
+        <loc>https://igorchudov.github.io/cswiki/guides/dust-2-smokes.html</loc>
+        <lastmod>2024-11-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://igorchudov.github.io/cswiki/guides/mirage-ct-smokes.html</loc>
+        <lastmod>2024-11-08</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://igorchudov.github.io/cswiki/guides/inferno-banana-flash.html</loc>
+        <lastmod>2024-11-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://igorchudov.github.io/cswiki/guides/beginners-spray-control.html</loc>
+        <lastmod>2024-11-12</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://igorchudov.github.io/cswiki/guides/overpass-pop-flashes.html</loc>
+        <lastmod>2024-11-03</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://igorchudov.github.io/cswiki/guides/nuke-outside-smokes.html</loc>
+        <lastmod>2024-10-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://igorchudov.github.io/cswiki/guides/economy-management.html</loc>
+        <lastmod>2024-11-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://igorchudov.github.io/cswiki/guides/vertigo-molotovs.html</loc>
+        <lastmod>2024-10-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://igorchudov.github.io/cswiki/guides/ancient-a-site.html</loc>
+        <lastmod>2024-10-30</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://igorchudov.github.io/cswiki/guides/crosshair-placement.html</loc>
+        <lastmod>2024-11-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://igorchudov.github.io/cswiki/guides/cache-mid-smokes.html</loc>
+        <lastmod>2024-10-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://igorchudov.github.io/cswiki/guides/anubis-b-defense.html</loc>
+        <lastmod>2024-10-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+</urlset>

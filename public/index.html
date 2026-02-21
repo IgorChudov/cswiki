@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>CS:GO Wiki — База скинов, гайды и партнёрские платформы</title>
+    <meta name="title" content="CS:GO Wiki — База скинов, гайды и партнёрские платформы">
+    <meta name="description" content="Ваш главный ресурс для Counter-Strike: Global Offensive. Более 1000 скинов, подробные гайды по смокам и флешкам, проверенные партнёрские платформы с бонусами.">
+    <meta name="keywords" content="CSGO, CS:GO, скины CSGO, гайды CSGO, смоки, флешки, партнёры, оружие, рейтинг скинов">
+    <meta name="author" content="CS:GO Wiki">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://igorchudov.github.io/cswiki/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://igorchudov.github.io/cswiki/">
+    <meta property="og:title" content="CS:GO Wiki — База скинов, гайды и партнёрские платформы">
+    <meta property="og:description" content="Ваш главный ресурс для Counter-Strike: Global Offensive. Более 1000 скинов, подробные гайды и проверенные партнёры.">
+    <meta property="og:image" content="https://igorchudov.github.io/cswiki/og-image.jpg">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="CS:GO Wiki">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://igorchudov.github.io/cswiki/">
+    <meta property="twitter:title" content="CS:GO Wiki — База скинов, гайды и партнёрские платформы">
+    <meta property="twitter:description" content="Ваш главный ресурс для Counter-Strike: Global Offensive. Более 1000 скинов, подробные гайды и проверенные партнёры.">
+    <meta property="twitter:image" content="https://igorchudov.github.io/cswiki/og-image.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23ea580c'/><text x='50' y='65' font-size='50' text-anchor='middle' fill='white' font-family='Arial'>CS</text></svg>">
+    
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://raw.githubusercontent.com">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        zinc: {
+                            300: '#d4d4d8',
+                            400: '#a1a1aa',
+                            500: '#71717a',
+                            700: '#3f3f46',
+                            800: '#27272a',
+                            900: '#18181b',
+                            950: '#09090b',
+                        },
+                        orange: {
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            900: '#7c2d12',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "CS:GO Wiki",
+        "url": "https://igorchudov.github.io/cswiki/",
+        "description": "Ваш главный ресурс для Counter-Strike: Global Offensive",
+        "inLanguage": "ru-RU",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://igorchudov.github.io/cswiki/skins.html?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    
+    <style>
+        body {
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+        .gradient-hero {
+            background: radial-gradient(ellipse at top, rgba(234, 88, 12, 0.2), transparent 70%),
+                        linear-gradient(to bottom, #18181b, #09090b);
+        }
+        .card-hover:hover {
+            border-color: rgba(234, 88, 12, 0.5);
+            box-shadow: 0 10px 40px -10px rgba(234, 88, 12, 0.3);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-zinc-950 text-white">
+    <!-- Navigation -->
+    <nav class="bg-zinc-900 border-b border-zinc-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="/" class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-br from-orange-500 to-amber-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold">CS</span>
+                    </div>
+                    <span class="text-white font-semibold">CS:GO Wiki</span>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="/" class="px-3 py-2 rounded-md bg-orange-600 text-white">Главная</a>
+                        <a href="skins.html" class="px-3 py-2 rounded-md text-zinc-300 hover:bg-zinc-800 hover:text-white transition-colors">Скины</a>
+                        <a href="partners.html" class="px-3 py-2 rounded-md text-zinc-300 hover:bg-zinc-800 hover:text-white transition-colors">Партнёры</a>
+                        <a href="guides/index.html" class="px-3 py-2 rounded-md text-zinc-300 hover:bg-zinc-800 hover:text-white transition-colors">Гайды</a>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-zinc-300 hover:text-white p-2">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden bg-zinc-800">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="/" class="block px-3 py-2 rounded-md bg-orange-600 text-white">Главная</a>
+                <a href="skins.html" class="block px-3 py-2 rounded-md text-zinc-300 hover:bg-zinc-700 hover:text-white">Скины</a>
+                <a href="partners.html" class="block px-3 py-2 rounded-md text-zinc-300 hover:bg-zinc-700 hover:text-white">Партнёры</a>
+                <a href="guides/index.html" class="block px-3 py-2 rounded-md text-zinc-300 hover:bg-zinc-700 hover:text-white">Гайды</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="gradient-hero overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+                <div class="text-center">
+                    <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
+                        Добро пожаловать в CS:GO Wiki
+                    </h1>
+                    <p class="text-xl text-zinc-400 max-w-2xl mx-auto mb-8">
+                        Ваш главный ресурс для Counter-Strike: Global Offensive — скины, гайды и проверенные партнёрские платформы. Откройте для себя редкие скины и эксклюзивные предложения.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="skins.html" class="px-8 py-4 bg-orange-600 hover:bg-orange-700 text-white rounded-lg transition-colors font-semibold">
+                            Скины
+                        </a>
+                        <a href="partners.html" class="px-8 py-4 bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg transition-colors font-semibold">
+                            Партнёры
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <article class="bg-zinc-900 rounded-lg p-6 border border-zinc-800 card-hover transition-all">
+                    <div class="w-12 h-12 bg-orange-600/20 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="h-6 w-6 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-2">Полная база данных</h3>
+                    <p class="text-zinc-400">Просматривайте нашу обширную базу скинов CS:GO с подробной информацией о редкости, износе и ценах.</p>
+                </article>
+
+                <article class="bg-zinc-900 rounded-lg p-6 border border-zinc-800 card-hover transition-all">
+                    <div class="w-12 h-12 bg-orange-600/20 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="h-6 w-6 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-2">Проверенные партнёры</h3>
+                    <p class="text-zinc-400">Подключайтесь к проверенным партнёрским платформам с эксклюзивными предложениями и специальными акциями.</p>
+                </article>
+
+                <article class="bg-zinc-900 rounded-lg p-6 border border-zinc-800 card-hover transition-all">
+                    <div class="w-12 h-12 bg-orange-600/20 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="h-6 w-6 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-2">Рыночная аналитика</h3>
+                    <p class="text-zinc-400">Следите за последними трендами, изменениями цен и рыночным анализом ваших любимых скинов.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="bg-zinc-900/50 border-y border-zinc-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div>
+                        <div class="text-orange-500 text-2xl font-bold mb-1">1000+</div>
+                        <div class="text-zinc-400">Скинов в базе</div>
+                    </div>
+                    <div>
+                        <div class="text-orange-500 text-2xl font-bold mb-1">50+</div>
+                        <div class="text-zinc-400">Коллекций</div>
+                    </div>
+                    <div>
+                        <div class="text-orange-500 text-2xl font-bold mb-1">15+</div>
+                        <div class="text-zinc-400">Партнёрских сайтов</div>
+                    </div>
+                    <div>
+                        <div class="text-orange-500 text-2xl font-bold mb-1">Ежедневно</div>
+                        <div class="text-zinc-400">Обновление цен</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Partners Section -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <h2 class="text-3xl font-bold text-white mb-8">Избранные партнёры</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- CSGOEmpire -->
+                <article class="bg-zinc-900 rounded-lg overflow-hidden border border-zinc-800 card-hover transition-all flex flex-col">
+                    <div class="aspect-video bg-zinc-800 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1596726618942-252c8b0183b7?w=400&h=300&fit=crop" 
+                             alt="CSGOEmpire - платформа для торговли скинами" 
+                             class="w-full h-full object-cover"
+                             loading="lazy">
+                        <div class="absolute top-2 right-2 bg-green-600/90 backdrop-blur-sm rounded-full px-2 py-1 flex items-center gap-1">
+                            <svg class="h-3 w-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-white text-xs">Проверено</span>
+                        </div>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <div class="mb-3">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-white font-semibold">CSGOEmpire</h3>
+                                <div class="flex items-center gap-1">
+                                    <svg class="h-4 w-4 text-yellow-500 fill-yellow-500" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                    </svg>
+                                    <span class="text-white">4.8</span>
+                                </div>
+                            </div>
+                            <p class="text-zinc-400 text-sm">Премиум платформа для торговли CS:GO с мгновенным выводом средств.</p>
+                        </div>
+                        <div class="mb-4">
+                            <span class="bg-orange-600/20 text-orange-400 border border-orange-600/50 rounded-full px-3 py-1 text-sm">Получите $5 бонус при регистрации</span>
+                        </div>
+                        <div class="mt-auto pt-4 border-t border-zinc-800">
+                            <a href="https://csgoempire.com/ref/YOURCODE" target="_blank" rel="noopener noreferrer" 
+                               class="block w-full bg-orange-600 hover:bg-orange-700 text-white text-center py-2 rounded-lg transition-colors font-semibold">
+                                Посетить сайт
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- SkinBaron -->
+                <article class="bg-zinc-900 rounded-lg overflow-hidden border border-zinc-800 card-hover transition-all flex flex-col">
+                    <div class="aspect-video bg-zinc-800 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop" 
+                             alt="SkinBaron - маркетплейс скинов" 
+                             class="w-full h-full object-cover"
+                             loading="lazy">
+                        <div class="absolute top-2 right-2 bg-green-600/90 backdrop-blur-sm rounded-full px-2 py-1 flex items-center gap-1">
+                            <svg class="h-3 w-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-white text-xs">Проверено</span>
+                        </div>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <div class="mb-3">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-white font-semibold">SkinBaron</h3>
+                                <div class="flex items-center gap-1">
+                                    <svg class="h-4 w-4 text-yellow-500 fill-yellow-500" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                    </svg>
+                                    <span class="text-white">4.7</span>
+                                </div>
+                            </div>
+                            <p class="text-zinc-400 text-sm">Покупайте и продавайте скины CS:GO мгновенно. Низкие комиссии.</p>
+                        </div>
+                        <div class="mb-4">
+                            <span class="bg-orange-600/20 text-orange-400 border border-orange-600/50 rounded-full px-3 py-1 text-sm">Скидка 5% на первую покупку</span>
+                        </div>
+                        <div class="mt-auto pt-4 border-t border-zinc-800">
+                            <a href="https://skinbaron.com/ref/YOURCODE" target="_blank" rel="noopener noreferrer" 
+                               class="block w-full bg-orange-600 hover:bg-orange-700 text-white text-center py-2 rounded-lg transition-colors font-semibold">
+                                Посетить сайт
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CSGORoll -->
+                <article class="bg-zinc-900 rounded-lg overflow-hidden border border-zinc-800 card-hover transition-all flex flex-col">
+                    <div class="aspect-video bg-zinc-800 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1605218427306-635ba2439af2?w=400&h=300&fit=crop" 
+                             alt="CSGORoll - игры и кейсы" 
+                             class="w-full h-full object-cover"
+                             loading="lazy">
+                        <div class="absolute top-2 right-2 bg-green-600/90 backdrop-blur-sm rounded-full px-2 py-1 flex items-center gap-1">
+                            <svg class="h-3 w-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-white text-xs">Проверено</span>
+                        </div>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <div class="mb-3">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-white font-semibold">CSGORoll</h3>
+                                <div class="flex items-center gap-1">
+                                    <svg class="h-4 w-4 text-yellow-500 fill-yellow-500" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                    </svg>
+                                    <span class="text-white">4.6</span>
+                                </div>
+                            </div>
+                            <p class="text-zinc-400 text-sm">Играйте в захватывающие игры, выигрывайте скины и получайте бесплатные кейсы.</p>
+                        </div>
+                        <div class="mb-4">
+                            <span class="bg-orange-600/20 text-orange-400 border border-orange-600/50 rounded-full px-3 py-1 text-sm">3 бесплатных кейса</span>
+                        </div>
+                        <div class="mt-auto pt-4 border-t border-zinc-800">
+                            <a href="https://csgoroll.com/ref/YOURCODE" target="_blank" rel="noopener noreferrer" 
+                               class="block w-full bg-orange-600 hover:bg-orange-700 text-white text-center py-2 rounded-lg transition-colors font-semibold">
+                                Посетить сайт
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="text-center mt-8">
+                <a href="partners.html" class="inline-flex items-center text-orange-500 hover:text-orange-400 transition-colors font-semibold">
+                    Смотреть всех партнёров
+                    <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-zinc-900 border-t border-zinc-800 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-br from-orange-500 to-amber-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold">CS</span>
+                    </div>
+                    <span class="text-zinc-400">© 2024 CS:GO Wiki. Все права защищены.</span>
+                </div>
+                <nav class="flex space-x-6">
+                    <a href="/" class="text-zinc-400 hover:text-white transition-colors">Главная</a>
+                    <a href="skins.html" class="text-zinc-400 hover:text-white transition-colors">Скины</a>
+                    <a href="partners.html" class="text-zinc-400 hover:text-white transition-colors">Партнёры</a>
+                    <a href="guides/index.html" class="text-zinc-400 hover:text-white transition-colors">Гайды</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

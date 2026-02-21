@@ -1,0 +1,21 @@
+# Robots.txt для CS:GO Wiki
+# https://igorchudov.github.io/cswiki/
+
+User-agent: *
+Allow: /
+
+# Разрешаем индексацию всех страниц
+Allow: /index.html
+Allow: /skins.html
+Allow: /partners.html
+Allow: /guides/
+
+# Запрещаем индексацию служебных файлов
+Disallow: /*.json$
+Disallow: /*.map$
+
+# Sitemap
+Sitemap: https://igorchudov.github.io/cswiki/sitemap.xml
+
+# Crawl-delay для снижения нагрузки
+Crawl-delay: 1
